@@ -30,7 +30,8 @@ class CreateMessageActivity : AppCompatActivity() {
         */
 
         /** Вариант создания нявного интента*/
-        // Создать обхект EditText
+        /*
+        // Создать объект EditText
         val messageView = findViewById<View>(R.id.message) as EditText
         // Получить текст из EditView
         val messageText = messageView.text.toString()
@@ -42,5 +43,24 @@ class CreateMessageActivity : AppCompatActivity() {
         intent.putExtra(Intent.EXTRA_TEXT, messageText)
         // Запуск активности через интент
         startActivity(intent)
+        */
+
+        /** Вариант вызова неявного интента без выбора приложения по умолчанию */
+        // Создать объект EditText
+        val messageView = findViewById<View>(R.id.message) as EditText
+        // Получить текст из EditView
+        val messageText = messageView.text.toString()
+        // Создать неявный интент с действиенм ACTION_SEND
+        val intent = Intent(Intent.ACTION_SEND)
+        // Тип интента
+        intent.type = "text/plain"
+        // Добавление текста в интент
+        intent.putExtra(Intent.EXTRA_TEXT, messageText)
+        // Добавление текта для сообщения
+        val chooserTitle = getString(R.string.chooser)
+        // Создать интент с без окна "по умолчанию"
+        val chosenIntent = Intent.createChooser(intent, chooserTitle)
+        // Запуск активности через интент
+        startActivity(chosenIntent)
     }
 }
